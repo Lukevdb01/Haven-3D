@@ -153,6 +153,9 @@
     <None Include="content\shaders\fragment.frag" />
     <None Include="content\shaders\vertex.vert" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="content\textures\among_us.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

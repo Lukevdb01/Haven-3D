@@ -39,6 +39,9 @@
     <ClInclude Include="source\engine\buffers\EBO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\engine\textures\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\engine\Application.cpp">
@@ -57,6 +60,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\buffers\EBO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\textures\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

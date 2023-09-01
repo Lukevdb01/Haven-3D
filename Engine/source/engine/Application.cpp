@@ -3,6 +3,8 @@
 #include "buffers/VBO.h"
 #include "buffers/VAO.h"
 #include "buffers/EBO.h"
+#include <textures/Texture.h>
+using namespace Engine::Textures;
 
 using namespace Engine::Buffers;
 using namespace Engine::Shaders;
@@ -28,17 +30,20 @@ namespace Engine {
 
 	void Application::Run()
 	{
-		float vertices[] = {
-			// positions         // colors
-			0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // top right (red)
-			0.5f, -0.5f, 0.0f,  1.0f, 0.5f, 0.0f,   // bottom right (orange)
-		   -0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   // bottom left (yellow)
-		   -0.5f,  0.5f, 0.0f,  0.0f, 1.0f, 0.0f    // top left (green)
+		// Vertices coordinates
+		float vertices[] =
+		{ //     COORDINATES     /        COLORS      /   TexCoord  //
+			-0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,	0.0f, 0.0f, // Lower left corner
+			-0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,	0.0f, 1.0f, // Upper left corner
+			 0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,	1.0f, 1.0f, // Upper right corner
+			 0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,	1.0f, 0.0f  // Lower right corner
 		};
 
-		unsigned int indices[] = {  // note that we start from 0!
-			0, 1, 3,   // first triangle
-			1, 2, 3    // second triangle
+		// Indices for vertices order
+		unsigned int indices[] =
+		{
+			0, 2, 1, // Upper triangle
+			0, 3, 2 // Lower triangle
 		};
 
 		// Create a GLFW window with the required parameters
@@ -73,12 +78,16 @@ namespace Engine {
 		EBO EBO1(indices, sizeof(indices));
 
 		// Link the VBO to the VAO
-		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
-		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3*sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
+		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
 		// Unbind all the buffers
 		VAO1.Unbind();
 		VBO1.Unbind();
 		EBO1.Unbind();
+
+		Texture tex("content/textures/among_us.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+		tex.texUnit(shaderProgram, "tex0", 0);
 
 		// Wireframe
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
@@ -93,17 +102,12 @@ namespace Engine {
 			glClear(GL_COLOR_BUFFER_BIT);
 			// Activate our shader program
 			shaderProgram.Activate();
-
-			// Update the uniform color
-			float timeValue = glfwGetTime();
-			float greenValue = sin(timeValue) / 2.0f + 0.5f;
-			int vertexColorLocation = glGetUniformLocation(shaderProgram.ID, "ourColor");
-			glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
-
+			// Bind the texture so that it appears in the rendering
+			tex.Bind();
 			// Bind the VAO buffer
 			VAO1.Bind();
 			// Draws the triangles to the screen
-			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
 			// Swap the buffers of the GLFW window
 			glfwSwapBuffers(window);
 
