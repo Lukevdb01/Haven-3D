@@ -1,3 +1,6 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+
 // std
 #include <iostream>
 
@@ -15,6 +18,8 @@ namespace Engine {
 
         void Run();
     private:
+        GLFWwindow* window;
+        int WIDTH = 800, HEIGHT = 800;
     };
 
     // To be defined in CLIENT
