@@ -1,10 +1,12 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include "input/input.h"
+#include "Core.h"
 
 // std
 #include <iostream>
 
-#include "Core.h"
+using namespace Engine::Input;
 
 namespace Engine {
     class ENGINE_API Application {
@@ -17,6 +19,7 @@ namespace Engine {
         virtual void OnDestroy() = 0;
 
         void Run();
+        InputManager* inp_m = nullptr;
     private:
         GLFWwindow* window;
         int WIDTH = 800, HEIGHT = 800;

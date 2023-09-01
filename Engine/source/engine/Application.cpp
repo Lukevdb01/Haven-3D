@@ -104,6 +104,8 @@ namespace Engine {
 		}
 		glfwMakeContextCurrent(window);
 
+		inp_m = new InputManager(window);
+
 		// Load GLAD (Modern OpenGL)
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cout << "Failed to initialize GLAD\n" << std::endl;
@@ -143,6 +145,10 @@ namespace Engine {
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
 		glEnable(GL_DEPTH_TEST);
 		// Main game-loop
+		inp_m->AddMapping("Jump", { GLFW_KEY_SPACE }, {});
+		inp_m->AddMapping("Shoot", {}, { GLFW_MOUSE_BUTTON_LEFT });
+		inp_m->AddMapping("MoveForward", { GLFW_KEY_W }, {});
+
 		while (!glfwWindowShouldClose(window))
 		{
 			/* Render here */
@@ -186,6 +192,8 @@ namespace Engine {
 
 			/* Poll for and process events */
 			glfwPollEvents();
+			inp_m->UpdateInputStates();
+			OnUpdate();
 		}
 	}
 }
