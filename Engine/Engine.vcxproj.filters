@@ -36,6 +36,9 @@
     <ClInclude Include="source\engine\buffers\VAO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="source\engine\buffers\EBO.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\engine\Application.cpp">
@@ -51,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="source\engine\buffers\VAO.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="source\engine\buffers\EBO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

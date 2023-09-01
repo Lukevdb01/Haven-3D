@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="source\engine\buffers\EBO.h" />
     <ClInclude Include="source\engine\shaders\Shader.h" />
     <ClInclude Include="source\Engine.h" />
     <ClInclude Include="source\engine\Application.h" />
@@ -152,6 +153,7 @@
     <ClInclude Include="source\engine\buffers\VAO.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\engine\buffers\EBO.cpp" />
     <ClCompile Include="source\engine\shaders\Shader.cpp" />
     <ClCompile Include="source\engine\Application.cpp" />
     <ClCompile Include="source\glad.c" />
