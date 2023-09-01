@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+/.vs/Haven
+/Engine/x64/Debug
+/Program/x64/Debug
+/x64/Debug
