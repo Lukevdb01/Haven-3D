@@ -20,6 +20,7 @@ namespace Engine::Shaders {
 
 	private:
 		std::string get_file_contents(const char* filename);
+		void compileErrors(unsigned int shader, const char* type);
 	};
 }
 

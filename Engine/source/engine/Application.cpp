@@ -52,6 +52,12 @@ namespace Engine {
 		if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 			std::cout << "Failed to initialize GLAD\n" << std::endl;
 		}
+
+		// Tell the user the num of vertexs supported by the hardware
+		int nrAttributes;
+		glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &nrAttributes);
+		std::cout << "Maximum nr of vertex attributes supported: " << nrAttributes << std::endl;
+
 		// Set the glViewport with the height & width
 		glViewport(0, 0, WIDTH, HEIGHT);
 
