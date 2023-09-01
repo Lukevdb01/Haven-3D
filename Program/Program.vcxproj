@@ -151,10 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="content\shaders\fragment.frag" />
-    <None Include="content\shaders\vertex.vert" />
+    <None Include="content\shaders\vertex.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="content\textures\among_us.png" />
+    <Image Include="content\textures\battle_royale.png" />
+    <Image Include="content\textures\pop_cat.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

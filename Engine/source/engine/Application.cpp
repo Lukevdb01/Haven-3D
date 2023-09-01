@@ -35,20 +35,66 @@ namespace Engine {
 
 	void Application::Run()
 	{
-		// Vertices coordinates
-		float vertices[] =
-		{ //     COORDINATES     /        COLORS      /   TexCoord  //
-			-0.5f, -0.5f, 0.0f,     1.0f, 0.0f, 0.0f,	0.0f, 0.0f, // Lower left corner
-			-0.5f,  0.5f, 0.0f,     0.0f, 1.0f, 0.0f,	0.0f, 1.0f, // Upper left corner
-			 0.5f,  0.5f, 0.0f,     0.0f, 0.0f, 1.0f,	1.0f, 1.0f, // Upper right corner
-			 0.5f, -0.5f, 0.0f,     1.0f, 1.0f, 1.0f,	1.0f, 0.0f  // Lower right corner
+		float vertices[] = {
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 0.0f,
+
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, 1.0f,
+
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f, 1.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f, 0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f, 1.0f
 		};
 
-		// Indices for vertices order
-		unsigned int indices[] =
-		{
-			0, 2, 1, // Upper triangle
-			0, 3, 2 // Lower triangle
+		glm::vec3 cubePositions[] = {
+		glm::vec3(0.0f,  0.0f,  0.0f),
+		glm::vec3(2.0f,  5.0f, -15.0f),
+		glm::vec3(-1.5f, -2.2f, -2.5f),
+		glm::vec3(-3.8f, -2.0f, -12.3f),
+		glm::vec3(2.4f, -0.4f, -3.5f),
+		glm::vec3(-1.7f,  3.0f, -7.5f),
+		glm::vec3(1.3f, -2.0f, -2.5f),
+		glm::vec3(1.5f,  2.0f, -2.5f),
+		glm::vec3(1.5f,  0.2f, -1.5f),
+		glm::vec3(-1.3f,  1.0f, -1.5f)
+		};
+
+		unsigned int indices[] = {
+			0, 1, 3, // first triangle
+			1, 2, 3  // second triangle
 		};
 
 		// Create a GLFW window with the required parameters
@@ -72,7 +118,7 @@ namespace Engine {
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		// Tell our shader program where the shader files are located
-		Shader shaderProgram("content/shaders/vertex.vert", "content/shaders/fragment.frag");
+		Shader shaderProgram("content/shaders/vertex.vs", "content/shaders/fragment.frag");
 		// Create & Bind the vertex array ovject buffer
 		VAO VAO1;
 		VAO1.Bind();
@@ -83,20 +129,19 @@ namespace Engine {
 		EBO EBO1(indices, sizeof(indices));
 
 		// Link the VBO to the VAO
-		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 5 * sizeof(float), (void*)0);
+		VAO1.LinkAttrib(VBO1, 1, 2, GL_FLOAT, 5 * sizeof(float), (void*)(3 * sizeof(float)));
 		// Unbind all the buffers
 		VAO1.Unbind();
 		VBO1.Unbind();
 		EBO1.Unbind();
 
 		Texture tex("content/textures/among_us.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-		tex.texUnit(shaderProgram, "tex0", 0);
+		tex.texUnit(shaderProgram, "texture1", 0);
 
 		// Wireframe
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
-
+		glEnable(GL_DEPTH_TEST);
 		// Main game-loop
 		while (!glfwWindowShouldClose(window))
 		{
@@ -104,23 +149,38 @@ namespace Engine {
 			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 
 			/* Swap front and back buffers */
-			glClear(GL_COLOR_BUFFER_BIT);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			// create transformations
-			glm::mat4 transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
-			transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
-			transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
 
-			// Activate our shader program
-			shaderProgram.Activate();
-			unsigned int transformLoc = glGetUniformLocation(shaderProgram.ID, "transform");
-			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 			// Bind the texture so that it appears in the rendering
 			tex.Bind();
+			shaderProgram.Activate();
+
+			// create transformations
+			glm::mat4 view = glm::mat4(1.0f);
+			glm::mat4 projection = glm::mat4(1.0f);
+
+			projection = glm::perspective(glm::radians(45.0f), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
+			view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+
+			// note: currently we set the projection matrix each frame, but since the projection matrix rarely changes it's often best practice to set it outside the main loop only once.
+			shaderProgram.setMat4("projection", projection);
+			shaderProgram.setMat4("view", view);
 			// Bind the VAO buffer
 			VAO1.Bind();
 			// Draws the triangles to the screen
-			glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
+			//glDrawElements(GL_TRIANGLES, sizeof(indices), GL_UNSIGNED_INT, 0);
+			for (unsigned int i = 0; i < 10; i++)
+			{
+				glm::mat4 model = glm::mat4(1.0f);
+				model = glm::translate(model, cubePositions[i]);
+
+				float angle = 20.0f * i;
+				model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
+				shaderProgram.setMat4("model", model);
+
+				glDrawArrays(GL_TRIANGLES, 0, 36);
+			}
 			// Swap the buffers of the GLFW window
 			glfwSwapBuffers(window);
 

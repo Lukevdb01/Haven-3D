@@ -7,6 +7,7 @@
 #include<sstream>
 #include<iostream>
 #include<cerrno>
+#include <glm/glm.hpp>
 
 namespace Engine::Shaders {
 	class Shader
@@ -16,6 +17,7 @@ namespace Engine::Shaders {
 		Shader(const char* vertexFile, const char* fragmentFile);
 
 		void Activate();
+		void setMat4(const std::string& name, const glm::mat4& mat) const;
 		void Delete();
 
 	private:

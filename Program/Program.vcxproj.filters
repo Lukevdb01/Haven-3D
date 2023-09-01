@@ -25,11 +25,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\shaders\vertex.vert" />
+    <None Include="content\shaders\vertex.vs" />
     <None Include="content\shaders\fragment.frag" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="content\textures\among_us.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="content\textures\battle_royale.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="content\textures\pop_cat.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
