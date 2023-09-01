@@ -1,11 +1,16 @@
 #include "Application.h"
+
 #include "shaders/Shader.h"
 #include "buffers/VBO.h"
 #include "buffers/VAO.h"
 #include "buffers/EBO.h"
 #include <textures/Texture.h>
-using namespace Engine::Textures;
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+
+using namespace Engine::Textures;
 using namespace Engine::Buffers;
 using namespace Engine::Shaders;
 
@@ -100,8 +105,16 @@ namespace Engine {
 
 			/* Swap front and back buffers */
 			glClear(GL_COLOR_BUFFER_BIT);
+
+			// create transformations
+			glm::mat4 transform = glm::mat4(1.0f); // make sure to initialize matrix to identity matrix first
+			transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+			transform = glm::rotate(transform, (float)glfwGetTime(), glm::vec3(0.0f, 0.0f, 1.0f));
+
 			// Activate our shader program
 			shaderProgram.Activate();
+			unsigned int transformLoc = glGetUniformLocation(shaderProgram.ID, "transform");
+			glUniformMatrix4fv(transformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 			// Bind the texture so that it appears in the rendering
 			tex.Bind();
 			// Bind the VAO buffer
