@@ -6,11 +6,11 @@ namespace Engine::Buffers {
 		glGenVertexArrays(1, &ID);
 	}
 
-	void VAO::LinkVBO(VBO& VBO, unsigned int layout)
+	void VAO::LinkAttrib(VBO& VBO, unsigned int layout, unsigned int numComponents, GLenum type, size_t stride, void* offset)
 	{
 		VBO.Bind();
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
-		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(layout, numComponents, type, GL_FALSE, stride, offset);
+		glEnableVertexAttribArray(layout);
 		VBO.Unbind();
 	}
 

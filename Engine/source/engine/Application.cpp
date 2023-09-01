@@ -28,12 +28,12 @@ namespace Engine {
 
 	void Application::Run()
 	{
-		// Coords for the square
 		float vertices[] = {
-			0.5f,  0.5f, 0.0f,  // top right
-			0.5f, -0.5f, 0.0f,  // bottom right
-			-0.5f, -0.5f, 0.0f,  // bottom left
-			-0.5f,  0.5f, 0.0f   // top left 
+			// positions         // colors
+			0.5f,  0.5f, 0.0f,  1.0f, 0.0f, 0.0f,   // top right (red)
+			0.5f, -0.5f, 0.0f,  1.0f, 0.5f, 0.0f,   // bottom right (orange)
+		   -0.5f, -0.5f, 0.0f,  1.0f, 1.0f, 0.0f,   // bottom left (yellow)
+		   -0.5f,  0.5f, 0.0f,  0.0f, 1.0f, 0.0f    // top left (green)
 		};
 
 		unsigned int indices[] = {  // note that we start from 0!
@@ -73,7 +73,8 @@ namespace Engine {
 		EBO EBO1(indices, sizeof(indices));
 
 		// Link the VBO to the VAO
-		VAO1.LinkVBO(VBO1, 0);
+		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3*sizeof(float)));
 		// Unbind all the buffers
 		VAO1.Unbind();
 		VBO1.Unbind();
@@ -92,6 +93,13 @@ namespace Engine {
 			glClear(GL_COLOR_BUFFER_BIT);
 			// Activate our shader program
 			shaderProgram.Activate();
+
+			// Update the uniform color
+			float timeValue = glfwGetTime();
+			float greenValue = sin(timeValue) / 2.0f + 0.5f;
+			int vertexColorLocation = glGetUniformLocation(shaderProgram.ID, "ourColor");
+			glUniform4f(vertexColorLocation, 0.0f, greenValue, 0.0f, 1.0f);
+
 			// Bind the VAO buffer
 			VAO1.Bind();
 			// Draws the triangles to the screen
