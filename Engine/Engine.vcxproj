@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="source\engine\camera\Camera.h" />
     <ClInclude Include="source\engine\buffers\EBO.h" />
     <ClInclude Include="source\engine\input\input_manager.h" />
     <ClInclude Include="source\engine\shaders\Shader.h" />
@@ -157,6 +158,7 @@
     <ClInclude Include="source\engine\textures\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\engine\camera\Camera.cpp" />
     <ClCompile Include="source\engine\buffers\EBO.cpp" />
     <ClCompile Include="source\engine\input\input_manager.cpp" />
     <ClCompile Include="source\engine\shaders\Shader.cpp" />

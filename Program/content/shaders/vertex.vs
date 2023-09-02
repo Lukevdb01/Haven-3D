@@ -1,16 +1,28 @@
-#version 460 core
-layout (location = 0) in vec3 aPos; // The position variable has attribute position 0
-layout (location = 1) in vec2 aTexCoord;
+#version 330 core
+
+// Positions/Coordinates
+layout (location = 0) in vec3 aPos;
+// Colors
+layout (location = 1) in vec3 aColor;
+// Texture Coordinates
+layout (location = 2) in vec2 aTex;
 
 
-out vec2 TexCoord;
+// Outputs the color for the Fragment Shader
+out vec3 color;
+// Outputs the texture coordinates to the fragment shader
+out vec2 texCoord;
 
-uniform mat4 model;
-uniform mat4 view;
-uniform mat4 projection;
+// Imports the camera matrix from the main function
+uniform mat4 camMatrix;
+
 
 void main()
 {
-	gl_Position = projection * view * model * vec4(aPos, 1.0); // see how we directly give a vec3 to vec4's constructor
-	TexCoord = vec2(aTexCoord.x, aTexCoord.y);
+	// Outputs the positions/coordinates of all vertices
+	gl_Position = camMatrix * vec4(aPos, 1.0);
+	// Assigns the colors from the Vertex Data to "color"
+	color = aColor;
+	// Assigns the texture coordinates from the Vertex Data to "texCoord"
+	texCoord = aTex;
 }

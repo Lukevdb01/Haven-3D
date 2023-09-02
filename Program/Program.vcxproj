@@ -155,7 +155,7 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="content\textures\among_us.png" />
-    <Image Include="content\textures\battle_royale.png" />
+    <Image Include="content\textures\brick.png" />
     <Image Include="content\textures\pop_cat.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

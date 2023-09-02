@@ -19,6 +19,9 @@ namespace Engine::Input {
         MoveBackward,
         MoveLeft,
         MoveRight,
+        LeftShift,
+        LeftMouseButton,
+        
         // Add more actions as needed
     };
 
