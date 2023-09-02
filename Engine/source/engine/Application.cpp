@@ -145,9 +145,7 @@ namespace Engine {
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
 		glEnable(GL_DEPTH_TEST);
 		// Main game-loop
-		inp_m->AddMapping("Jump", { GLFW_KEY_SPACE }, {});
-		inp_m->AddMapping("Shoot", {}, { GLFW_MOUSE_BUTTON_LEFT });
-		inp_m->AddMapping("MoveForward", { GLFW_KEY_W }, {});
+		OnCreate();
 
 		while (!glfwWindowShouldClose(window))
 		{
@@ -156,7 +154,6 @@ namespace Engine {
 
 			/* Swap front and back buffers */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 
 			// Bind the texture so that it appears in the rendering
 			tex.Bind();

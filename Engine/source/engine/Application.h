@@ -1,6 +1,6 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include "input/input.h"
+#include "input/input_manager.h"
 #include "Core.h"
 
 // std

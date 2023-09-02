@@ -42,7 +42,7 @@
     <ClInclude Include="source\engine\textures\Texture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="source\engine\input\input.h">
+    <ClInclude Include="source\engine\input\input_manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClCompile Include="source\engine\textures\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="source\engine\input\input.cpp">
+    <ClCompile Include="source\engine\input\input_manager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
