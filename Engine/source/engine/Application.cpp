@@ -39,7 +39,7 @@ namespace Engine {
 	{
 		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 		float vertices[] = {
-			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
@@ -80,17 +80,6 @@ namespace Engine {
 		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
 		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
-		};
-
-		// Indices for vertices order
-		unsigned int indices[] =
-		{
-			0, 1, 2,
-			0, 2, 3,
-			0, 1, 4,
-			1, 2, 4,
-			2, 3, 4,
-			3, 0, 4
 		};
 
 		// Create a GLFW window with the required parameters
@@ -139,7 +128,7 @@ namespace Engine {
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
 
 		glEnable(GL_DEPTH_TEST);
-		Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 2.0f));
+		Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 3.0f));
 
 		OnCreate();
 
@@ -159,6 +148,7 @@ namespace Engine {
 			lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
 			lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 			lightingShader.setVec3("lightPos", lightPos);
+			lightingShader.setVec3("viewPos", camera.Position);
 
 			// Handles camera inputs
 			camera.HandleInput(window, inp_m);

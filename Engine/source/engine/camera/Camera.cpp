@@ -54,10 +54,10 @@ namespace Engine::View {
 		}
 
 		if (inp_m->IsActionPressed(InputAction::LeftShift)) {
-			speed = 0.005f;
+			speed = 0.5f;
 		}
 		else {
-			speed = 0.001f;
+			speed = 0.1f;
 		}
 
 		if (inp_m->IsActionPressed(InputAction::LeftMouseButton)) {
