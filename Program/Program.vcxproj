@@ -156,8 +156,8 @@
     <None Include="content\shaders\material_vertex.vs" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="content\textures\among_us.png" />
-    <Image Include="content\textures\brick.png" />
+    <Image Include="content\textures\container.png" />
+    <Image Include="content\textures\container_specular.png" />
     <Image Include="content\textures\pop_cat.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

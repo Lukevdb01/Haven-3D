@@ -126,12 +126,15 @@ namespace Engine {
 
 		RenderVBO.Unbind();
 
-		Texture tex("content/textures/container.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
+		Texture tex("content/textures/container.png", GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE);
+		Texture tex_spec("content/textures/container_specular.png", GL_TEXTURE_2D, 1, GL_RGBA, GL_UNSIGNED_BYTE);
+
 		lightingShader.Activate();
+
 		lightingShader.setInt("materials.diffuse", 0);
+		lightingShader.setInt("materials.specular", 1);
 		// Wireframe
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
-
 		glEnable(GL_DEPTH_TEST);
 		Camera camera(WIDTH, HEIGHT, glm::vec3(0.0f, 0.0f, 3.0f));
 
@@ -156,10 +159,7 @@ namespace Engine {
 			lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
 			lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
 
-			lightingShader.setVec3("material.ambient", 1.0f, 0.5f, 0.31f);
-			lightingShader.setVec3("material.diffuse", 1.0f, 0.5f, 0.31f);
-			lightingShader.setVec3("material.specular", 0.5f, 0.5f, 0.5f);
-			lightingShader.setFloat("material.shininess", 32.0f);
+			lightingShader.setFloat("material.shininess", 64.0f);
 
 			// Handles camera inputs
 			camera.HandleInput(window, inp_m);
@@ -167,6 +167,7 @@ namespace Engine {
 			camera.Matrix(lightingShader, "camera_matrix");
 			glm::mat4 model = glm::mat4(1.0f);
 			lightingShader.setMat4("model", model);
+			tex_spec.Bind();
 			tex.Bind();
 			// Bind the VAO buffer
 			CubeVAO.Bind();
