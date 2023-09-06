@@ -65,6 +65,16 @@ namespace Engine::Shaders {
 		glUniform3f(glGetUniformLocation(ID, name.c_str()), x, y, z);
 	}
 
+	void Shader::setFloat(const std::string& name, float value) const
+	{
+		glUniform1f(glGetUniformLocation(ID, name.c_str()), value);
+	}
+
+	void Shader::setInt(const std::string& name, int value) const
+	{
+		glUniform1i(glGetUniformLocation(ID, name.c_str()), value);
+	}
+
 	std::string Shader::get_file_contents(const char* filename)
 	{
 		std::ifstream in(filename, std::ios::binary);
