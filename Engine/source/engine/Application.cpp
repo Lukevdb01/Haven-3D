@@ -37,7 +37,7 @@ namespace Engine {
 
 	void Application::Run()
 	{
-		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
+		glm::vec3 lightPos(0.0f, 1.0f, 1.0f);
 		float vertices[] = {
 			// positions          // normals           // texture coords
 			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,  0.0f,  0.0f,
@@ -152,12 +152,16 @@ namespace Engine {
 			camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
 
 			lightingShader.Activate();
-			lightingShader.setVec3("light.position", lightPos);
+			//lightingShader.setVec3("light.position", lightPos);
+			lightingShader.setVec3("light.direction", -0.2f, -1.0f, -0.3f);
 			lightingShader.setVec3("viewPos", camera.Position);
 
 			lightingShader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
 			lightingShader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f); // darken diffuse light a bit
 			lightingShader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+			lightingShader.setFloat("light.constant", 1.0f);
+			lightingShader.setFloat("light.linear", 0.09f);
+			lightingShader.setFloat("light.quadratic", 0.032f);
 
 			lightingShader.setFloat("material.shininess", 64.0f);
 

@@ -152,6 +152,7 @@
   <ItemGroup>
     <None Include="content\shaders\color_fragment.frag" />
     <None Include="content\shaders\color_vertex.vs" />
+    <None Include="content\shaders\functions\light_types.glsl" />
     <None Include="content\shaders\material_fragment.frag" />
     <None Include="content\shaders\material_vertex.vs" />
   </ItemGroup>
