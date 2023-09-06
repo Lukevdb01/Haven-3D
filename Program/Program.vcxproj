@@ -150,8 +150,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="content\shaders\fragment.frag" />
-    <None Include="content\shaders\vertex.vs" />
+    <None Include="content\shaders\color_fragment.frag" />
+    <None Include="content\shaders\color_vertex.vs" />
+    <None Include="content\shaders\light_fragment.frag" />
+    <None Include="content\shaders\light_vertex.vs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="content\textures\among_us.png" />

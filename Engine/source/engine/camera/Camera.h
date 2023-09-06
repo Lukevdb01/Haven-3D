@@ -22,13 +22,15 @@ namespace Engine::View {
         glm::vec3 Position;
         glm::vec3 Orientation = glm::vec3(0.0f, 0.0f, -1.0f);
         glm::vec3 Up = glm::vec3(0.0f, 1.0f, 0.0f);
+        glm::mat4 cameraMatrix = glm::mat4(1.0f);
 
         bool fClick = true;
         int WIDTH, HEIGHT;
         float speed = 0.5f, sensitivity = 100.0f;
 
         Camera(int WIDTH, int HEIGHT, glm::vec3 position);
-        void Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform);
+        void Matrix(Shader& shader, const char* uniform);
+        void UpdateMatrix(float FOVdeg, float nearPlane, float farPlane);
         void HandleInput(GLFWwindow* window, InputManager* inp);
         InputManager* inp_m = nullptr;
     private:

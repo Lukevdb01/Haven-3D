@@ -38,13 +38,50 @@ namespace Engine {
 	void Application::Run()
 	{
 		float vertices[] = {
-			-0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-			-0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-			0.5f, 0.0f, -0.5f,     0.83f, 0.70f, 0.44f,	0.0f, 0.0f,
-			0.5f, 0.0f,  0.5f,     0.83f, 0.70f, 0.44f,	5.0f, 0.0f,
-			0.0f, 0.8f,  0.0f,     0.92f, 0.86f, 0.76f,	2.5f, 5.0f
+	-0.5f, -0.5f, -0.5f,
+	 0.5f, -0.5f, -0.5f,
+	 0.5f,  0.5f, -0.5f,
+	 0.5f,  0.5f, -0.5f,
+	-0.5f,  0.5f, -0.5f,
+	-0.5f, -0.5f, -0.5f,
+
+	-0.5f, -0.5f,  0.5f,
+	 0.5f, -0.5f,  0.5f,
+	 0.5f,  0.5f,  0.5f,
+	 0.5f,  0.5f,  0.5f,
+	-0.5f,  0.5f,  0.5f,
+	-0.5f, -0.5f,  0.5f,
+
+	-0.5f,  0.5f,  0.5f,
+	-0.5f,  0.5f, -0.5f,
+	-0.5f, -0.5f, -0.5f,
+	-0.5f, -0.5f, -0.5f,
+	-0.5f, -0.5f,  0.5f,
+	-0.5f,  0.5f,  0.5f,
+
+	 0.5f,  0.5f,  0.5f,
+	 0.5f,  0.5f, -0.5f,
+	 0.5f, -0.5f, -0.5f,
+	 0.5f, -0.5f, -0.5f,
+	 0.5f, -0.5f,  0.5f,
+	 0.5f,  0.5f,  0.5f,
+
+	-0.5f, -0.5f, -0.5f,
+	 0.5f, -0.5f, -0.5f,
+	 0.5f, -0.5f,  0.5f,
+	 0.5f, -0.5f,  0.5f,
+	-0.5f, -0.5f,  0.5f,
+	-0.5f, -0.5f, -0.5f,
+
+	-0.5f,  0.5f, -0.5f,
+	 0.5f,  0.5f, -0.5f,
+	 0.5f,  0.5f,  0.5f,
+	 0.5f,  0.5f,  0.5f,
+	-0.5f,  0.5f,  0.5f,
+	-0.5f,  0.5f, -0.5f,
 		};
 
+		// Indices for vertices order
 		unsigned int indices[] =
 		{
 			0, 1, 2,
@@ -78,28 +115,22 @@ namespace Engine {
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		// Tell our shader program where the shader files are located
-		Shader shaderProgram("content/shaders/vertex.vs", "content/shaders/fragment.frag");
+		Shader lightShader("content/shaders/color_vertex.vs", "content/shaders/color_fragment.frag");
+		Shader lightCubeShader("content/shaders/light_vertex.vs", "content/shaders/light_fragment.frag");
 		// Create & Bind the vertex array ovject buffer
-		VAO VAO1;
-		VAO1.Bind();
+		VAO CubeVAO;
+		CubeVAO.Bind();
 
-		// Create & Set the Vertex buffer object buffer
-		VBO VBO1(vertices, sizeof(vertices));
-		// Create & Set the Element array object buffer
-		EBO EBO1(indices, sizeof(indices));
+		VBO RenderVBO(vertices, sizeof(vertices));
+		CubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		CubeVAO.Unbind();
 
-		// Link the VBO to the VAO
-		VAO1.LinkAttrib(VBO1, 0, 3, GL_FLOAT, 8 * sizeof(float), (void*)0);
-		VAO1.LinkAttrib(VBO1, 1, 3, GL_FLOAT, 8 * sizeof(float), (void*)(3 * sizeof(float)));
-		VAO1.LinkAttrib(VBO1, 2, 2, GL_FLOAT, 8 * sizeof(float), (void*)(6 * sizeof(float)));
+		VAO lightCubeVAO;
+		lightCubeVAO.Bind();
+		lightCubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		lightCubeVAO.Unbind();
 
-		// Unbind all the buffers
-		VAO1.Unbind();
-		VBO1.Unbind();
-		EBO1.Unbind();
-
-		Texture tex("content/textures/among_us.png", GL_TEXTURE_2D, GL_TEXTURE0, GL_RGBA, GL_UNSIGNED_BYTE);
-		tex.texUnit(shaderProgram, "texture1", 0);
+		RenderVBO.Unbind();
 
 		// Wireframe
 		/*glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);*/
@@ -113,24 +144,39 @@ namespace Engine {
 		while (!glfwWindowShouldClose(window))
 		{
 			/* Render here */
-			glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 			/* Swap front and back buffers */
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			// Bind the texture so that it appears in the rendering
-			tex.Bind();
-			shaderProgram.Activate();
+			camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
+
+			lightShader.Activate();
+
+			lightShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+			lightShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
 
 			// Handles camera inputs
 			camera.HandleInput(window, inp_m);
 			// Updates and exports the camera matrix to the Vertex Shader
-			camera.Matrix(45.0f, 0.1f, 100.0f, shaderProgram, "camMatrix");
+			camera.Matrix(lightShader, "camera_matrix");
+			glm::mat4 model = glm::mat4(1.0f);
+			lightShader.setMat4("model", model);
 
 			// Bind the VAO buffer
-			VAO1.Bind();
-			// Draws the triangles to the screen
-			glDrawElements(GL_TRIANGLES, sizeof(indices) / sizeof(int), GL_UNSIGNED_INT, 0);
+			CubeVAO.Bind();
+			// Draws the triangles to the screen			
+			glDrawArrays(GL_TRIANGLES, 0, 36);
+			
+			lightCubeShader.Activate();
+			camera.Matrix(lightCubeShader, "camera_matrix");
+			model = glm::mat4(1.0f);
+			model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
+			model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
+			lightCubeShader.setMat4("model", model);
+
+			lightCubeVAO.Bind();
+			glDrawArrays(GL_TRIANGLES, 0, 36);
 
 			// Swap the buffers of the GLFW window
 			glfwSwapBuffers(window);

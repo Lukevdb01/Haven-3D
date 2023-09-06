@@ -9,14 +9,24 @@ namespace Engine::View {
 		Position = position;
 	}
 
-	void Camera::Matrix(float FOVdeg, float nearPlane, float farPlane, Shader& shader, const char* uniform)
+	void Camera::Matrix(Shader& shader, const char* uniform)
 	{
+		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(cameraMatrix));
+	}
+
+	void Camera::UpdateMatrix(float FOVdeg, float nearPlane, float farPlane)
+	{
+		// Initializes matrices since otherwise they will be the null matrix
 		glm::mat4 view = glm::mat4(1.0f);
 		glm::mat4 projection = glm::mat4(1.0f);
 
+		// Makes camera look in the right direction from the right position
 		view = glm::lookAt(Position, Position + Orientation, Up);
+		// Adds perspective to the scene
 		projection = glm::perspective(glm::radians(FOVdeg), (float)WIDTH / HEIGHT, nearPlane, farPlane);
-		glUniformMatrix4fv(glGetUniformLocation(shader.ID, uniform), 1, GL_FALSE, glm::value_ptr(projection * view));
+
+		// Sets new camera matrix
+		cameraMatrix = projection * view;
 	}
 
 	void Camera::HandleInput(GLFWwindow* window, InputManager* inp)
@@ -44,10 +54,10 @@ namespace Engine::View {
 		}
 
 		if (inp_m->IsActionPressed(InputAction::LeftShift)) {
-			speed = 0.4f;
+			speed = 0.005f;
 		}
 		else {
-			speed = 0.1f;
+			speed = 0.001f;
 		}
 
 		if (inp_m->IsActionPressed(InputAction::LeftMouseButton)) {

@@ -20,6 +20,9 @@ namespace Engine::Shaders {
 		void setMat4(const std::string& name, const glm::mat4& mat) const;
 		void Delete();
 
+		void setVec3(const std::string& name, const glm::vec3& value) const;
+		void setVec3(const std::string& name, float x, float y, float z) const;
+
 	private:
 		std::string get_file_contents(const char* filename);
 		void compileErrors(unsigned int shader, const char* type);
