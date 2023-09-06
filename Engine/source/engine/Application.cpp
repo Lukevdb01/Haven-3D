@@ -37,48 +37,49 @@ namespace Engine {
 
 	void Application::Run()
 	{
+		glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
 		float vertices[] = {
-	-0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f, -0.5f,
-	 0.5f,  0.5f, -0.5f,
-	 0.5f,  0.5f, -0.5f,
-	-0.5f,  0.5f, -0.5f,
-	-0.5f, -0.5f, -0.5f,
+			-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-	-0.5f, -0.5f,  0.5f,
-	 0.5f, -0.5f,  0.5f,
-	 0.5f,  0.5f,  0.5f,
-	 0.5f,  0.5f,  0.5f,
-	-0.5f,  0.5f,  0.5f,
-	-0.5f, -0.5f,  0.5f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-	-0.5f,  0.5f,  0.5f,
-	-0.5f,  0.5f, -0.5f,
-	-0.5f, -0.5f, -0.5f,
-	-0.5f, -0.5f, -0.5f,
-	-0.5f, -0.5f,  0.5f,
-	-0.5f,  0.5f,  0.5f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-	 0.5f,  0.5f,  0.5f,
-	 0.5f,  0.5f, -0.5f,
-	 0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f,  0.5f,
-	 0.5f,  0.5f,  0.5f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-	-0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f, -0.5f,
-	 0.5f, -0.5f,  0.5f,
-	 0.5f, -0.5f,  0.5f,
-	-0.5f, -0.5f,  0.5f,
-	-0.5f, -0.5f, -0.5f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-	-0.5f,  0.5f, -0.5f,
-	 0.5f,  0.5f, -0.5f,
-	 0.5f,  0.5f,  0.5f,
-	 0.5f,  0.5f,  0.5f,
-	-0.5f,  0.5f,  0.5f,
-	-0.5f,  0.5f, -0.5f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
 		};
 
 		// Indices for vertices order
@@ -115,19 +116,21 @@ namespace Engine {
 		glViewport(0, 0, WIDTH, HEIGHT);
 
 		// Tell our shader program where the shader files are located
-		Shader lightShader("content/shaders/color_vertex.vs", "content/shaders/color_fragment.frag");
-		Shader lightCubeShader("content/shaders/light_vertex.vs", "content/shaders/light_fragment.frag");
+		Shader lightingShader("content/shaders/light_vertex.vs", "content/shaders/light_fragment.frag");
+		Shader lightCubeShader("content/shaders/color_vertex.vs", "content/shaders/color_fragment.frag");
 		// Create & Bind the vertex array ovject buffer
 		VAO CubeVAO;
 		CubeVAO.Bind();
 
 		VBO RenderVBO(vertices, sizeof(vertices));
-		CubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		CubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
+		CubeVAO.LinkAttrib(RenderVBO, 1, 3, GL_FLOAT, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 		CubeVAO.Unbind();
+
 
 		VAO lightCubeVAO;
 		lightCubeVAO.Bind();
-		lightCubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 3 * sizeof(float), (void*)0);
+		lightCubeVAO.LinkAttrib(RenderVBO, 0, 3, GL_FLOAT, 6 * sizeof(float), (void*)0);
 		lightCubeVAO.Unbind();
 
 		RenderVBO.Unbind();
@@ -151,17 +154,18 @@ namespace Engine {
 
 			camera.UpdateMatrix(45.0f, 0.1f, 100.0f);
 
-			lightShader.Activate();
+			lightingShader.Activate();
 
-			lightShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
-			lightShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+			lightingShader.setVec3("objectColor", 1.0f, 0.5f, 0.31f);
+			lightingShader.setVec3("lightColor", 1.0f, 1.0f, 1.0f);
+			lightingShader.setVec3("lightPos", lightPos);
 
 			// Handles camera inputs
 			camera.HandleInput(window, inp_m);
 			// Updates and exports the camera matrix to the Vertex Shader
-			camera.Matrix(lightShader, "camera_matrix");
+			camera.Matrix(lightingShader, "camera_matrix");
 			glm::mat4 model = glm::mat4(1.0f);
-			lightShader.setMat4("model", model);
+			lightingShader.setMat4("model", model);
 
 			// Bind the VAO buffer
 			CubeVAO.Bind();
@@ -171,7 +175,7 @@ namespace Engine {
 			lightCubeShader.Activate();
 			camera.Matrix(lightCubeShader, "camera_matrix");
 			model = glm::mat4(1.0f);
-			model = glm::translate(model, glm::vec3(1.2f, 1.0f, 2.0f));
+			model = glm::translate(model, lightPos);
 			model = glm::scale(model, glm::vec3(0.2f)); // a smaller cube
 			lightCubeShader.setMat4("model", model);
 

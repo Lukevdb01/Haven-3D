@@ -2,7 +2,6 @@
 
 // Positions/Coordinates
 layout (location = 0) in vec3 aPos;
-// Imports the camera matrix from the main function
 
 uniform mat4 model;
 uniform mat4 camera_matrix;

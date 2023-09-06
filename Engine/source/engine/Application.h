@@ -23,7 +23,6 @@ namespace Engine {
     private:
         GLFWwindow* window;
         int WIDTH = 800, HEIGHT = 800;
-
     };
 
     // To be defined in CLIENT
