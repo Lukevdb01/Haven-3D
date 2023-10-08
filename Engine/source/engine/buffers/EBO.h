@@ -2,13 +2,14 @@
 #define EBO_CLASS_H
 
 #include <glad/glad.h>
+#include <vector>
 
 namespace Engine::Buffers {
 	class EBO {
 	public:
 		unsigned int ID;
 
-		EBO(unsigned int* indices, size_t size);
+		EBO(std::vector<GLuint>& indices);
 
 		void Bind();
 		void Unbind();

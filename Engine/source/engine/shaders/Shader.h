@@ -9,8 +9,10 @@
 #include<cerrno>
 #include <glm/glm.hpp>
 
+#include "../Core.h"
+
 namespace Engine::Shaders {
-	class Shader
+	class ENGINE_API Shader
 	{
 	public:
 		unsigned int ID;
@@ -24,8 +26,8 @@ namespace Engine::Shaders {
 		void setVec3(const std::string& name, float x, float y, float z) const;
 		void setFloat(const std::string& name, float value) const;
 		void setInt(const std::string& name, int value) const;
+		static std::string get_file_contents(const char* filename);
 	private:
-		std::string get_file_contents(const char* filename);
 		void compileErrors(unsigned int shader, const char* type);
 	};
 }

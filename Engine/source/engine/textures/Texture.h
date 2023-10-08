@@ -4,7 +4,7 @@
 #include <glad/glad.h>
 #include <stb/stb_image.h>
 
-#include "shaders/Shader.h"
+#include "../shaders/Shader.h"
 
 using namespace Engine::Shaders;
 
@@ -12,8 +12,8 @@ namespace Engine::Textures {
 	class Texture {
 	public:
 		unsigned int ID;
-		GLenum type;
-		Texture(const char* image, GLenum texType, GLenum slot, GLenum format, GLenum pixelType);
+		const char* type;
+		Texture(const char* image, const char* texType, GLuint slot);
 
 		void texUnit(Shader& shader, const char* uniform, unsigned int unit);
 		void Bind();

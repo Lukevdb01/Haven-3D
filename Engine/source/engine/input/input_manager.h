@@ -6,7 +6,6 @@
 #include <map>
 #include <string>
 
-#include "../Core.h"
 
 namespace Engine::Input {
 
@@ -25,7 +24,7 @@ namespace Engine::Input {
         // Add more actions as needed
     };
 
-    class ENGINE_API InputManager {
+    class InputManager {
     public:
         InputManager(GLFWwindow* window);
 

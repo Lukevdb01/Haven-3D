@@ -145,6 +145,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="source\engine\model\Model.h" />
+    <ClInclude Include="source\engine\model\Mesh.h" />
     <ClInclude Include="source\engine\camera\Camera.h" />
     <ClInclude Include="source\engine\buffers\EBO.h" />
     <ClInclude Include="source\engine\input\input_manager.h" />
@@ -158,6 +160,8 @@
     <ClInclude Include="source\engine\textures\Texture.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="source\engine\model\Model.cpp" />
+    <ClCompile Include="source\engine\model\Mesh.cpp" />
     <ClCompile Include="source\engine\camera\Camera.cpp" />
     <ClCompile Include="source\engine\buffers\EBO.cpp" />
     <ClCompile Include="source\engine\input\input_manager.cpp" />

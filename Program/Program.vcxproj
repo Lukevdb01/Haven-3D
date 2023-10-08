@@ -150,6 +150,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="content\assets\grindstone\scene.bin" />
     <None Include="content\shaders\functions\light_types.glsl" />
     <None Include="content\shaders\default.frag" />
     <None Include="content\shaders\default.vs" />

@@ -28,6 +28,9 @@
     <None Include="content\shaders\default.vs" />
     <None Include="content\shaders\default.frag" />
     <None Include="content\shaders\functions\light_types.glsl" />
+    <None Include="content\assets\grindstone\scene.bin">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="content\textures\pop_cat.png">

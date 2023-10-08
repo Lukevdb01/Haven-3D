@@ -9,12 +9,13 @@
 #include <glm/gtx/rotate_vector.hpp>
 #include <glm/gtx/vector_angle.hpp>
 
-#include "input/input_manager.h"
-#include "shaders/Shader.h"
+#include "../shaders/Shader.h"
 #include "../Core.h"
+#include "../input/input_manager.h"
 
-using namespace Engine::Input;
+
 using namespace Engine::Shaders;
+using namespace Engine::Input;
 
 namespace Engine::View {
     class ENGINE_API Camera {
