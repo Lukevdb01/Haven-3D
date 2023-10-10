@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <string>
+#include "../Core.h"
 
 
 namespace Engine::Input {
@@ -24,7 +25,7 @@ namespace Engine::Input {
         // Add more actions as needed
     };
 
-    class InputManager {
+    class ENGINE_API InputManager {
     public:
         InputManager(GLFWwindow* window);
 

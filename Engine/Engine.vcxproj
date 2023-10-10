@@ -158,6 +158,7 @@
     <ClInclude Include="source\engine\buffers\VBO.h" />
     <ClInclude Include="source\engine\buffers\VAO.h" />
     <ClInclude Include="source\engine\textures\Texture.h" />
+    <ClInclude Include="source\engine\platform\Window.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\engine\model\Model.cpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="source\engine\buffers\VAO.cpp" />
     <ClCompile Include="source\stb_image.cpp" />
     <ClCompile Include="source\engine\textures\Texture.cpp" />
+    <ClCompile Include="source\engine\platform\Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

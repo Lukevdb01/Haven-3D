@@ -11,18 +11,11 @@ using namespace Engine::Input;
 namespace Engine {
     class ENGINE_API Application {
     public:
-        Application();
-        virtual ~Application(); // Destructor to clean up allocated resources
-
         virtual void OnCreate() = 0;
         virtual void OnUpdate() = 0;
         virtual void OnDestroy() = 0;
-
         void Run();
-        InputManager* inp_m = nullptr;
-    private:
-        GLFWwindow* window;
-        int WIDTH = 800, HEIGHT = 800;
+        GLFWwindow* w_win = nullptr;
     };
 
     // To be defined in CLIENT
