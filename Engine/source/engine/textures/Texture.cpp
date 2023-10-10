@@ -9,7 +9,8 @@ namespace Engine::Textures {
 		unsigned char* bytes = stbi_load(image, &widthImg, &heightImg, &numColCh, 0);
 
 		glGenTextures(1, &ID);
-		glActiveTexture(slot);
+		glActiveTexture(GL_TEXTURE0 + slot);
+		unit = slot;
 		glBindTexture(GL_TEXTURE_2D, ID);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_LINEAR);
@@ -74,6 +75,7 @@ namespace Engine::Textures {
 
 	void Texture::Bind()
 	{
+		glActiveTexture(GL_TEXTURE0 + unit);
 		glBindTexture(GL_TEXTURE_2D, ID);
 	}
 

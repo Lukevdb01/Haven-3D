@@ -18,4 +18,5 @@ void Source::OnUpdate()
 
 void Source::OnDestroy()
 {
+	shaderProgram->Delete();
 }
